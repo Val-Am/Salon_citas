@@ -1,0 +1,103 @@
+<!-- publicador/index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Publicador - Cita</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family:"Montserrat", sans-serif;
+      background-color: #FCF6DF;
+      padding: 30px;
+      color: #B00043;
+    }
+  
+    h1 {
+      text-align: center;
+      color: #B00043;
+      margin-bottom: 30px;
+    }
+  
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+    }
+  
+    label {
+      font-weight: 500;
+      display: block;
+      margin-bottom: 5px;
+    }
+  
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #B00043;
+      border-radius: 8px;
+      box-sizing: border-box;
+      font-size: 14px;
+      color: #B00043;
+    }
+  
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #F26699;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+  
+    button:hover {
+      background-color: #B00043;
+    }
+  
+    #resultado {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: 500;
+    }
+  </style>
+  
+</head>
+<body>
+  <h2>☎️ Agendar Cita</h2>
+  <label>Nombre del Cliente:</label>
+  <input type="text" id="cliente">
+
+  <label>Servicio:</label>
+  <select id="servicio">
+    <option value="Corte de cabello">Corte de cabello</option>
+    <option value="Cepillado">Cepillado</option>
+    <option value="Botox capilar">Botox capilar</option>
+    <option value="Keratinas">Keratinas</option>
+    <option value="Peinado">Peinado</option>
+    <option value="Tratamiento capilar">Tratamiento capilar</option>
+    <option value="Tinte">Tinte</option>
+    <option value="Manicura">Manicura</option>
+    <option value="Pedicura">Pedicura</option>
+    <option value="Depilacion">Depilacion</option>
+  </select>
+
+  <label>Fecha (YYYY-MM-DD):</label>
+  <input type="date" id="fecha">
+
+  <label>Hora (HH:MM):</label>
+  <input type="time" id="hora">
+
+  <button onclick="enviarCita()">Enviar Cita</button>
+
+  <div class="mensaje" id="mensajeConfirmacion"></div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
