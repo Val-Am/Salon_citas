@@ -1,30 +1,39 @@
-<!-- publicador/index.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Publicador - Cita</title>
+  <title>Gestor de Citas - Salon de Belleza</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     body {
-      font-family:"Montserrat", sans-serif;
+      font-family: "Montserrat", sans-serif;
       background-color: #FCF6DF;
-      padding: 30px;
+      padding: 20px;
       color: #B00043;
     }
   
-    h1 {
+    h1, h2 {
       text-align: center;
       color: #B00043;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
   
-    form {
-      max-width: 400px;
-      margin: 0 auto;
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+  
+    .form-section, .list-section {
+      background-color: white;
       padding: 25px;
       border-radius: 15px;
-      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+      min-width: 400px;
+      max-width: 800px;
+      flex: 1;
     }
   
     label {
@@ -36,7 +45,7 @@
     input, select {
       width: 100%;
       padding: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       border: 1px solid #B00043;
       border-radius: 8px;
       box-sizing: border-box;
@@ -45,58 +54,155 @@
     }
   
     button {
-      width: 100%;
-      padding: 12px;
+      padding: 10px 15px;
       background-color: #F26699;
       color: white;
       border: none;
       border-radius: 8px;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 600;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      margin-right: 10px;
     }
   
     button:hover {
       background-color: #B00043;
     }
   
-    #resultado {
-      text-align: center;
+    .btn-primary {
+      background-color: #F26699;
+    }
+  
+    .btn-danger {
+      background-color: #ff4757;
+    }
+  
+    .btn-success {
+      background-color: #2ed573;
+    }
+  
+    .search-box {
+      margin-bottom: 20px;
+      display: flex;
+      gap: 10px;
+    }
+  
+    .search-box input {
+      flex: 1;
+      margin-bottom: 0;
+    }
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
       margin-top: 20px;
-      font-weight: 500;
+    }
+  
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+  
+    th {
+      background-color: #F26699;
+      color: white;
+    }
+  
+    tr:hover {
+      background-color: #f5f5f5;
+    }
+  
+    .action-buttons {
+      display: flex;
+      gap: 5px;
+    }
+  
+    .mensaje {
+      text-align: center;
+      margin: 15px 0;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  
+    .success {
+      background-color: #d4edda;
+      color: #155724;
+    }
+  
+    .error {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+  
+    .hidden {
+      display: none;
     }
   </style>
-  
 </head>
 <body>
-  <h2>☎️ Agendar Cita</h2>
-  <label>Nombre del Cliente:</label>
-  <input type="text" id="cliente">
-
-  <label>Servicio:</label>
-  <select id="servicio">
-    <option value="Corte de cabello">Corte de cabello</option>
-    <option value="Cepillado">Cepillado</option>
-    <option value="Botox capilar">Botox capilar</option>
-    <option value="Keratinas">Keratinas</option>
-    <option value="Peinado">Peinado</option>
-    <option value="Tratamiento capilar">Tratamiento capilar</option>
-    <option value="Tinte">Tinte</option>
-    <option value="Manicura">Manicura</option>
-    <option value="Pedicura">Pedicura</option>
-    <option value="Depilacion">Depilacion</option>
-  </select>
-
-  <label>Fecha (YYYY-MM-DD):</label>
-  <input type="date" id="fecha">
-
-  <label>Hora (HH:MM):</label>
-  <input type="time" id="hora">
-
-  <button onclick="enviarCita()">Enviar Cita</button>
-
-  <div class="mensaje" id="mensajeConfirmacion"></div>
+  <h1>💇‍♀️ Gestor de Citas - Salon de Belleza</h1>
+  
+  <div class="container">
+    <div class="form-section">
+      <h2 id="form-title">☎️ Agendar Nueva Cita</h2>
+      <input type="hidden" id="cita-id">
+      
+      <label>Nombre del Cliente:</label>
+      <input type="text" id="cliente" required>
+  
+      <label>Servicio:</label>
+      <select id="servicio" required>
+        <option value="">Seleccione un servicio</option>
+        <option value="Corte de cabello">Corte de cabello</option>
+        <option value="Cepillado">Cepillado</option>
+        <option value="Botox capilar">Botox capilar</option>
+        <option value="Keratinas">Keratinas</option>
+        <option value="Peinado">Peinado</option>
+        <option value="Tratamiento capilar">Tratamiento capilar</option>
+        <option value="Tinte">Tinte</option>
+        <option value="Manicura">Manicura</option>
+        <option value="Pedicura">Pedicura</option>
+        <option value="Depilacion">Depilacion</option>
+      </select>
+  
+      <label>Fecha (YYYY-MM-DD):</label>
+      <input type="date" id="fecha" required>
+  
+      <label>Hora (HH:MM):</label>
+      <input type="time" id="hora" required>
+  
+      <button id="btn-submit" class="btn-primary" onclick="guardarCita()">Guardar Cita</button>
+      <button id="btn-cancel" class="btn-danger hidden" onclick="cancelarEdicion()">Cancelar</button>
+      
+      <div id="mensaje" class="mensaje"></div>
+    </div>
+  
+    <div class="list-section">
+      <h2>📋 Lista de Citas</h2>
+      
+      <div class="search-box">
+        <input type="text" id="search" placeholder="Buscar por cliente o servicio...">
+        <button onclick="buscarCitas()"><i class="fas fa-search"></i> Buscar</button>
+      </div>
+      
+      <table id="citas-table">
+        <thead>
+          <tr>
+            <th>Cliente</th>
+            <th>Servicio</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="citas-body">
+          <!-- Las citas se cargarán aquí -->
+        </tbody>
+      </table>
+    </div>
+  </div>
 
   <script src="renderer.js"></script>
 </body>
